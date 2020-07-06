@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Welcome to our Django Blog{% endblock title %}
+
+
+{% block stylesheet %}
+	<style>
+		.allpost{
+			display: inline-block;
+		}
+	</style>
+{% endblock stylesheet %}
+	
+
+{% block content %}
+
+		<div class="allpost">
+			{% for p in post %}
+				<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+					<figure>
+						<a href="{% url 'single_post' id=p.id %}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>
+					</figure>
+					<span class="fh5co-meta"><a href="{% url 'topic' name=p.category.name %}">{{ p.category.name }}</a></span>
+					<h2 class="fh5co-article-title"><a href="{% url 'single_post' id=p.id %}">{{ p.title }}</a></h2>
+					<h4><a href="{% url 'author' name=p.article_author.name.username %}">{{ p.article_author.name.get_full_name }}</a></h4>
+					<span class="fh5co-meta fh5co-date">{{ p.posted_on }}</span>
+				</article>
+			{% endfor %}
+			<div class="clear-fix"></div>
+		</div>
+			
+			
+			<div class="container-fluid text-center">
+				<div class="row">
+					<div class="span6" style="float: none; margin: 0 auto;">
+						<ul class="pagination">
+							{% if post.has_previous %}
+							 <li><a href="?page=1">First</a></li>
+							  <li><a href="?page={{ post.previous_page_number }}">&laquo;</a></li>
+							{% else %}
+							  <li class="disabled"><span>&laquo;</span></li>
+							{% endif %}
+							{% for i in post.paginator.page_range %}
+							  {% if post.number == i %}
+								<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+							  {% else %}
+								<li><a href="?page={{ i }}">{{ i }}</a></li>
+							  {% endif %}
+							{% endfor %}
+							{% if post.has_next %}
+							  <li><a href="?page={{ post.next_page_number }}">&raquo;</a></li>
+							  <li><a href="?page={{ post.paginator.num_pages }}">Last</a></li>
+							{% else %}
+							  <li class="disabled"><span>&raquo;</span></li>
+							{% endif %}
+						  </ul>
+					</div>
+				</div>
+			</div>
+			
+
+			
+		
+{% endblock content %}
+
+
+{% block script %}
+	
+{% endblock script %}
+	

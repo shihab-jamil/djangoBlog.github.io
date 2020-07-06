@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    
+{% endblock title %}
+
+
+
+{% block stylesheet %}
+    <style>
+        .alert-success {
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+            height: 50px;
+            margin-top: 160px;
+            width: 332px;
+            text-align: center;
+            margin-left: 180px;
+        }
+
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+            height: 50px;
+            margin-top: 160px;
+            width: 332px;
+            text-align: center;
+            margin-left: 180px;
+        }
+    </style>
+{% endblock stylesheet %}
+
+
+
+
+{% block profile %}
+    <div class="fh5co-bio">
+        <figure>
+            <img src="{{ user.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+        </figure>
+        <h3 class="heading">About Me</h3>
+        <h2>{{ user.name.get_full_name }}</h2>
+        <h4>{{ user.name.email }}</h4>
+        <p>{{ user.details }} </p>
+        <ul class="fh5co-social">
+            <li><a href="#"><i class="icon-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-facebook"></i></a></li>
+            <li><a href="#"><i class="icon-instagram"></i></a></li>
+        </ul>
+    </div>
+{% endblock profile %}
+        
+
+
+
+{% block content %}
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                 <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row pull pull-right">
+            <a href="{% url 'categoryList' %}" class="btn btn-primary">Categorys</a>
+            <a href="{% url 'create' %}" class="btn btn-primary">Add new article</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Posted on</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for p in post %}
+                    <tr>
+                        <td><a href="{% url 'single_post' id=p.id %}">{{ p.title }}</a></td>
+                        <td>{{ p.posted_on }}</td>
+                        <td><a href="{% url 'delete' id=p.id  %}" >Delete</a>  |  <a href="{% url 'update' id=p.id %}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+
+
+
+
+{% block script %}
+    
+{% endblock script %}
+    

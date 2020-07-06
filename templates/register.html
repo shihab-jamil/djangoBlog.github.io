@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Please register for new account
+{% endblock title %}
+
+
+
+{% block stylesheet %}
+    
+{% endblock stylesheet %}
+
+
+
+
+{% block profile %}
+    
+{% endblock profile %}
+        
+
+
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}                
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+{% endblock content %}
+
+
+
+
+{% block script %}
+    
+{% endblock script %}
+    

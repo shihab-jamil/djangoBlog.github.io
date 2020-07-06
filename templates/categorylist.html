@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    
+{% endblock title %}
+
+
+
+{% block stylesheet %}
+    
+{% endblock stylesheet %}
+
+
+
+
+{% block profile %}
+    
+{% endblock profile %}
+        
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row pull pull-right">
+            <a href="{% url 'categoryCreat' %}" class="btn btn-primary">Add new Category</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for c in catagorys %}
+                    <tr>
+                        <td><a href="{% url 'topic' name=c.name %}">{{ c.name }}</a></td>
+                        <td><a href="" >Delete</a>  |  <a href="">Edit</a></td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+
+
+
+
+{% block script %}
+    
+{% endblock script %}
+    
